@@ -1,0 +1,9 @@
+requests
+pandas>=1.5,<2.1
+pyarrow>=10
+numpy>=1.22,<1.25
+statsmodels>=0.13
+linearmodels>=4.29
+scipy>=1.9,<1.11
+tqdm>=4.60
+lxml>=4.9

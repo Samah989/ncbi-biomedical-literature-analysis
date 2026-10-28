@@ -1,0 +1,30 @@
+# HTCondor submit for the 3 NCBI RQ regressions.
+container_image = /cvmfs/singularity.opensciencegrid.org/opensciencegrid/osgvo-ubuntu-20.04:latest
+
+executable = run_regression.sh
+arguments  = $(rq_number)
+
+transfer_input_files = run_regression.py, requirements-osg.txt, ../src, data
+transfer_output_files = results
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+request_cpus   = 2
+request_memory = 6 GB
+request_disk   = 8 GB
++JobDurationCategory = "Medium"
+
+max_retries = 2
+# OS is provided by container_image above; no additional host-OS requirement needed.
+
+log             = logs/regress.$(Cluster).$(Process).log
+output          = logs/regress.$(Cluster).$(Process).out
+error           = logs/regress.$(Cluster).$(Process).err
+stream_output   = True
+stream_error    = True
+
+queue rq_number from (
+    1
+    2
+    3
+)
